@@ -30,12 +30,15 @@ let saveDeliveryReceipt = (data) => {
 }
     
 
+
 let findMessages = function(){
       let options =  {
+         "date": {
+            $gte: new Date((new Date().getTime() - (30 * 24 * 60 * 60 * 1000)))
+          },
         sort: {
-          createdAt: -1
-        },
-        limit: 1
+          "deliverTime": -1
+        }
       }
 
   return deliveryReceipts.find({}, {}, options).populate({
