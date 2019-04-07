@@ -1,6 +1,6 @@
 let responseFlags = {
-    ACTION_FAILED: 101,
-    ACTION_SUCCESSFUL: 102
+    ACTION_FAILED: 500,
+    ACTION_SUCCESSFUL: 200
     //Can add more in the future.
 }
 

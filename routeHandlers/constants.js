@@ -1,5 +1,6 @@
 let constants = {
-    senderId : "NHS"
+    yourFiretextSenderId : "NHS",
+    firetextNominatedUrl: "api/firetext/"
 }
 
 module.exports = constants;
