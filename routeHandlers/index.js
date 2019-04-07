@@ -1,31 +1,59 @@
 
+const responseFlags = require('./responseFlags');
+const constants = require('./constants');
+const utilityFunctions = require('./utilityFunctions');
+/**
+ *This will take a json object with the following fields to send a text message:
+	 * Mobile Number (string)
+	 * Message text (string)
+	 * Nhs number (10 digit number)
+ */
 
-
-let sendSMS = (req, res) => {
+let sendSMS = function(req, res){
 	
-	//send feedback. 
 	(async () => {
+		console.log(JSON.stringify(req.body));
+		let to = req.body.mobileNumber;
+		let message = req.body.messageText;
+		let nhsNumber = req.body.nhsNumber;
+		let from = constants.SenderID;
 
+		let data = {
+			to,
+			message,
+			from
+		}
 
+		await utilityFunctions.sendRequestToSmsService(data);
 
-		// extract to, from, messageBody etc. from the request
-		// make some async call, e.g.call to TwilioAPI, call to DB
-		// send to user that Twilio has been called. 
-		// loggin twilio usuing twilioconfig
-		// create Firetext client  with 
-		// call client.messages.createe
+		let response = {
+			flag: responseFlags.ACTION_SUCCESSFUL,
+			message: 'Message Sent Successfully',
+			data: {}
+		};
 
-		// 
+		return response;
+
 	})()
-	.catch(err => {
+	.catch(function(error){
+		console.error(error.message);
+
+		let response = {
+			flag: responseFlags.ACTION_FAILED,
+			message: 'The message could not be delivered. Please try again.'
+		};
+
+		return response;
 	})
-	.then(() => {
+	.then(function(response){
+		console.log(JSON.stringify(response));
+		return res.send(response);
 	})
 }
 
 
+		
 
 module.exports = {
 	sendSMS
-	
 }
