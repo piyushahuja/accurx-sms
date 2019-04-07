@@ -1,12 +1,10 @@
 const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema;
 
-
-
 const deliveryReceiptSchema = new Schema({
-  mobileNumber: {type: Schema.Types.ObjectId, ref: 'MobileNumber'},
+  mobileNumber: {type: String},
   status: { type: Number },
-  deliverTime: {type: Date}
+  deliveryTime: {type: Date}
 }, {
     timestamps: true
   });

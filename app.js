@@ -3,13 +3,11 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const dbConfig = require('./configurations/dbConfig');
 
-const mongoConnection = require('./mongoConnection');
-
-
+const mongo = require('./mongo');
 const mountRoutes = require('./routes');
 
 
-new mongoConnection(dbConfig);
+mongo.connect(dbConfig.MONGO);
 
 const app = express();
 app.use(bodyParser.json());
