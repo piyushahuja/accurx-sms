@@ -6,7 +6,15 @@ let mobileNumbers = require('../models/mobileNumbers');
 
 let saveMobileNumber = ({mobileNumber, nhsNumber}) => {
 
-    return mobileNumbers.update({mobileNumber: mobileNumber}, {$set:nhsNumber}, {upsert:true}).exec()
+    let criteria = {
+      mobileNumber: mobileNumber
+    }
+
+    let document = {
+      mobileNumber, nhsNumber
+    }
+
+    return mobileNumbers.update(criteria, document, {upsert:true}).exec()
           .then((result) => {
               console.log('RESULT ::: ', JSON.stringify(result));
               return JSON.parse(JSON.stringify(result));

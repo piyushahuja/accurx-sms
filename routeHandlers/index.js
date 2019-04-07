@@ -32,7 +32,7 @@ let sendSMS = function(req, res){
 			message,
 			from
 		}
-		await dbHelperFunctions.savePatient({to, nhsNumber});
+		await dbHelperFunctions.saveMobileNumber({to, nhsNumber});
 		await utilityFunctions.sendRequestToSmsService(data);
 		
 

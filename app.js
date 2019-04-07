@@ -12,8 +12,6 @@ const mountRoutes = require('./routes');
 new mongoConnection(dbConfig);
 
 const app = express();
-//app.use(require('morgan')('dev'));
-////app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 mountRoutes(app);
 
