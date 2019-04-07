@@ -32,16 +32,19 @@ let saveDeliveryReceipt = (data) => {
 
 
 let findMessages = function(){
-      let options =  {
-         "date": {
+      let criteria = {
+        "deliverTime": {
             $gte: new Date((new Date().getTime() - (30 * 24 * 60 * 60 * 1000)))
-          },
+        }
+      };
+
+      let options =  {
         sort: {
           "deliverTime": -1
         }
       }
 
-  return deliveryReceipts.find({}, {}, options).populate({
+  return deliveryReceipts.find(criteria, {}, options).populate({
       path: 'mobileNumber',
       select: 'nhsNumber'
     }).exec()
